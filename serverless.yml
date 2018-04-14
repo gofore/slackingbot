@@ -94,7 +94,7 @@ provider:
 
 functions:
   GetSentMessages:
-    handler: api.get_historical_alarms
+    handler: api.get_historical_messages
     memorySize: 2048
     events:
       - http:
@@ -109,7 +109,7 @@ functions:
             type: token
 
   SendMessage:
-    handler: api.put_alarm
+    handler: api.send_slack_message
     memorySize: 2048
     events:
       - http:
