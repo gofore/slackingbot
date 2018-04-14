@@ -5,6 +5,7 @@ import urllib
 import boto3
 import time
 import decimal
+import googletrans
 
 
 print('Loading function')
@@ -105,14 +106,22 @@ def slack_event_handler(event, context):
 
         else:
             print("BOT_ID not found - Continuing")
-            # Get the text of the message the user sent to the bot,
-            # and reverse it.
-
+            
             text = slack_event['event']['text']
-            reversed_text = text[::-1]
-
-            # Get the ID of the channel where the message was posted.
-            channel_id = slack_event['event']["channel"]
+            
+            translator = googletrans.Translator()
+            translated_text = translator.translate(text).text
+            
+            response = translated_text
+            
+            # # Get the text of the message the user sent to the bot,
+            # # and reverse it.
+            #
+            # text = slack_event['event']['text']
+            # reversed_text = text[::-1]
+            #
+            # # Get the ID of the channel where the message was posted.
+            # channel_id = slack_event['event']["channel"]
 
             # We need to send back three pieces of information:
             #     1. The reversed text (text)
@@ -125,7 +134,7 @@ def slack_event_handler(event, context):
                 (
                     ("token", _read_bot_token()),
                     ("channel", channel_id),
-                    ("text", reversed_text)
+                    ("text", response)
                 )
             )
             data = data.encode("ascii")
