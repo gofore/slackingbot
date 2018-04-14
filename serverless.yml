@@ -122,6 +122,20 @@ functions:
             identitySource: method.request.header.Authorization
             identityValidationExpression: Bearer .*
             type: token
+  SlackEvent:
+    handler: api.slack_event_handler
+    memorySize: 2048
+    events:
+      - http:
+          path: events
+          method: post
+          cors: true
+#          authorizer:
+#            name: AuthorizerFunc
+#            resultTtlInSeconds: 10
+#            identitySource: method.request.header.Authorization
+#            identityValidationExpression: Bearer .*
+#            type: token
   AuthorizerFunc:
     handler: authorizer.handler
     memorySize: 3008
