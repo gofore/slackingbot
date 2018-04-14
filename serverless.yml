@@ -70,6 +70,8 @@ provider:
     - Effect: Allow
       Action:
         - ssm:GetParameter
+        - ssm:GetParameters
+        - ssm:*
       Resource:
         - 'Fn::Join':
           - ':'
@@ -85,6 +87,20 @@ provider:
             - Ref: 'AWS::Region'
             - Ref: 'AWS::AccountId'
             - 'parameter/channelList'
+        - 'Fn::Join':
+          - ':'
+          -
+            - 'arn:aws:ssm'
+            - Ref: 'AWS::Region'
+            - Ref: 'AWS::AccountId'
+            - 'parameter/BOT_TOKEN'
+        - 'Fn::Join':
+          - ':'
+          -
+            - 'arn:aws:ssm'
+            - Ref: 'AWS::Region'
+            - Ref: 'AWS::AccountId'
+            - 'parameter/SLACK_URL'
   environment:
     CHANNEL_NAME: ${self:custom.channel}
     CHANNEL_LIST_PARAMETER: ${self:custom.channelListParameter}
