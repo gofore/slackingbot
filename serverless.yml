@@ -13,7 +13,7 @@ custom:
   channels: "flowdock-notifications"
   channelListParameter: channelList
   messageTable: messages-${self:custom.environmentName}
-  authorizationTableName: alarmauthorization-${self:custom.environmentName}
+  authorizationTableName: slackingbot-authorization-${self:custom.environmentName}
 
 provider:
   name: aws
